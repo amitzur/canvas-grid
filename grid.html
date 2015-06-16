@@ -35,14 +35,18 @@
     }</style>
 </head>
 <body style="margin:0">
-<div id="log"></div>
 <script src="aQuery.js"></script>
 <script src="delta.js"></script>
 <script>
-    var $log = $("#log");
-    function log(msg) {
-        console.log(msg);
-        $log.innerHTML = msg + "<br>" + $log.innerHTML;
+    if (/[\?&]log=/.test(location.search)) {
+        $("body").appendChild($c("<div id='log'>"));
+        var $log = $("#log");
+        log = function(msg) {
+            console.log(msg);
+            $log.innerHTML = msg + "<br>" + $log.innerHTML;
+        }
+    } else {
+        log = console.log.bind(console);
     }
 </script>
 <script>
